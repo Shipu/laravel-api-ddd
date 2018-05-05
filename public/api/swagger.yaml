@@ -1,0 +1,75 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://yo-judge.lrvl/api'
+info:
+  description: Yo Judge API description
+  version: "v1"
+  title: Yo-Judge
+tags:
+  - name: test
+    description: ''
+  - name: user
+    description: ''
+  - name: auth
+    description: ''
+paths:
+  /hello:
+    get:
+      tags:
+        - test
+      summary: hello
+      responses:
+        '200':
+          description: successful operation
+  /protected:
+    get:
+      tags:
+        - test
+      summary: protected
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: successful operation
+  /users:
+    get:
+      tags:
+        - user
+      summary: users
+      responses:
+        '200':
+          description: successful operation
+  /auth/login:
+    post:
+      tags:
+        - auth
+      summary: auth/login
+      responses:
+        '200':
+          description: successful operation
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - email
+  /auth/signup:
+    post:
+      tags:
+        - auth
+      summary: auth/signup
+      responses:
+        '200':
+          description: successful operation
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT  
