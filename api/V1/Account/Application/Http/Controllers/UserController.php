@@ -7,17 +7,17 @@ use Api\V1\Core\Application\Http\Controllers\ApiController;
 
 class UserController extends ApiController
 {
-    public function allUsers()
+    public function index()
     {
         $users = User::paginate(25);
 
-        return $this->response->array($users);
+        return $users;
     }
 
-    public function singleUser($id)
+    public function show($id)
     {
         $user = User::findOrFail($id);
 
-        return $this->response->array($user->toArray());
+        return $user;
     }
 }

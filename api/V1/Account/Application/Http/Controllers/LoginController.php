@@ -50,7 +50,7 @@ class LoginController extends ApiController
      * @param JWTAuth $JWTAuth
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login(LoginRequest $request, JWTAuth $JWTAuth)
+    public function login(LoginRequest $request)
     {
         $credentials = $request->only(['email', 'password']);
         try {
@@ -66,6 +66,16 @@ class LoginController extends ApiController
                 'access_token' => $token,
                 'status' => 'ok',
                 'expires_in' => Auth::guard()->factory()->getTTL() * 60
+            ]);
+    }
+
+    public function logout(JWTAuth $JWTAuth)
+    {
+        $this->guard()->logout();
+
+        return response()
+            ->json([
+                'status' => 'Logout',
             ]);
     }
 }
